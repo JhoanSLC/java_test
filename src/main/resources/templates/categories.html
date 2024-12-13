@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Categories</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        input {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        .error-message {
+            color: #e74c3c;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f9f9f9;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+
+        .delete-button {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .delete-button:hover {
+            background-color: #c82333;
+        }
+
+        .message {
+            text-align: center;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Categories</h1>
+        <form id="categoryForm">
+            <input type="text" id="categoryName" placeholder="Category Name" required />
+            <button type="submit">Add Category</button>
+            <div class="error-message" id="error-message"></div>
+        </form>
+        <ul id="categoryList"></ul>
+        <div class="message" id="success-message"></div>
+    </div>
+
+    <script>
+        const categoryList = document.getElementById("categoryList");
+        const categoryForm = document.getElementById("categoryForm");
+        const errorMessage = document.getElementById("error-message");
+        const successMessage = document.getElementById("success-message");
+
+        // Fetch all categories
+        function fetchCategories() {
+            axios.get('/api/categories').then(response => {
+                categoryList.innerHTML = '';
+                response.data.forEach(category => {
+                    const li = document.createElement('li');
+                    li.textContent = category.name;
+                    li.innerHTML += ` <button class="delete-button" onclick="deleteCategory(${category.id})">Delete</button>`;
+                    categoryList.appendChild(li);
+                });
+            });
+        }
+
+        // Add new category
+        categoryForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+            const categoryName = document.getElementById('categoryName').value.trim();
+
+            if (!categoryName) {
+                errorMessage.textContent = 'Category name cannot be empty.';
+                return;
+            }
+
+            axios.post('/api/categories', { name: categoryName })
+                .then(() => {
+                    fetchCategories();
+                    categoryForm.reset();
+                    errorMessage.textContent = '';
+                    successMessage.textContent = 'Category added successfully!';
+                    setTimeout(() => successMessage.textContent = '', 3000);
+                })
+                .catch(() => {
+                    errorMessage.textContent = 'Error adding category. Please try again.';
+                });
+        });
+
+        // Delete category
+        function deleteCategory(id) {
+            axios.delete(`/api/categories/${id}`)
+                .then(() => {
+                    fetchCategories();
+                    successMessage.textContent = 'Category deleted successfully!';
+                    setTimeout(() => successMessage.textContent = '', 3000);
+                })
+                .catch(() => {
+                    errorMessage.textContent = 'Error deleting category. It might be related to other products.';
+                });
+        }
+
+        fetchCategories();
+    </script>
+</body>
+</html>
