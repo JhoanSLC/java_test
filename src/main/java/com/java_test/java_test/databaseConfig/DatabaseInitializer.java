@@ -20,6 +20,7 @@ public class DatabaseInitializer {
                 String createDatabase = "CREATE DATABASE campusjavatest";
                 stmt.executeUpdate(createDatabase);
                 System.out.println("Database created succesfully!!");
+
             } else {
                 System.out.println("Database already exists");
             }

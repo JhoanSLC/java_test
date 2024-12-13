@@ -11,5 +11,7 @@ CREATE TABLE product (
     name VARCHAR(50) NOT NULL,
     description VARCHAR(255),
     price DECIMAL(10, 2) NOT NULL CHECK (price > 0),
-    categoryId INTEGER REFERENCES category(id)
+    categoryid INTEGER REFERENCES category(id)
 );
+
+
