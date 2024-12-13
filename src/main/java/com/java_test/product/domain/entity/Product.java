@@ -19,7 +19,7 @@ public class Product {
     private Long id;
 
     @Column(nullable = false) // Specifies that this column cannot be null
-    @Size(min = 3, max = 100) // Enforces that the name must be between 3 and 50 characters long
+    @Size(min = 3, max = 50) // Enforces that the name must be between 3 and 50 characters long
     private String name;
 
     @Column(length = 255) // Specifies that the maximum length for this column is 255 characters
