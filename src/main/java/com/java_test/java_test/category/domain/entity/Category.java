@@ -1,4 +1,4 @@
-package com.java_test.category.domain.entity;
+package com.java_test.java_test.category.domain.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
@@ -19,5 +19,5 @@ public class Category {
     @Column(nullable = false, unique = true) // Specifies that this column cannot be null and must be unique
     @Size(min = 3, max = 50) // Defines a size constraint for this field, with a minimum of 3 characters and a maximum of 50 characters
     private String name; 
-    
+
 }

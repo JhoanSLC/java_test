@@ -1,6 +1,6 @@
-package com.java_test.product.domain.entity;
+package com.java_test.java_test.product.domain.entity;
 
-import com.java_test.category.domain.entity.Category;
+import com.java_test.java_test.category.domain.entity.Category;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
@@ -30,6 +30,6 @@ public class Product {
     private Double price; // Price of the product, must be greater than 0
 
     @ManyToOne // Defines a many-to-one relationship with the Category entity
-    @JoinColumn(name = "categoria_id", nullable = false) // Specifies the foreign key column name and ensures it cannot be null
+    @JoinColumn(name = "categoryId", nullable = false) // Specifies the foreign key column name and ensures it cannot be null
     private Category category; // The category to which the product belongs
 }
