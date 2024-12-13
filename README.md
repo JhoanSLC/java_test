@@ -188,9 +188,9 @@ Este proyecto usa Maven para gestionar las dependencias. Asegúrate de tener las
     spring.application.name=java_test
 
     # Configuración de la base de datos
-    spring.datasource.url=jdbc:postgresql://localhost:1402/campusjavatest
-    spring.datasource.username=user
-    spring.datasource.password=password
+    spring.datasource.url=jdbc:postgresql://localhost:1402/campusjavatest # Cambiar ruta de ser necesario (Ajustar puerto)
+    spring.datasource.username=user # Cambiar usuario
+    spring.datasource.password=password # Cambiar contraseña
     spring.datasource.driver-class-name=org.postgresql.Driver
 
     # Configuración de JPA
@@ -215,7 +215,7 @@ Este proyecto usa Maven para gestionar las dependencias. Asegúrate de tener las
 
    public class DatabaseInitializer {
        
-       // Este método inicializa la base de datos verificando si existe, y creándola si no es así
+       
        public static void initializeDatabase() {
            // Parámetros de conexión a la base de datos
            String url = "jdbc:postgresql://localhost:1402/postgres"; // URL del servidor PostgreSQL
@@ -223,28 +223,29 @@ Este proyecto usa Maven para gestionar las dependencias. Asegúrate de tener las
            String password = "password"; // Contraseña configurada en application.properties
 
            try (
-               // Establecer conexión con el servidor PostgreSQL
+               
                Connection conn = DriverManager.getConnection(url, user, password);
-               // Crear un objeto Statement para ejecutar consultas SQL
+               
                Statement stmt = conn.createStatement()
            ) {
-               // Consulta SQL para verificar si la base de datos 'campusjavatest' ya existe
-               String checkDatabase = "SELECT 1 FROM pg_database WHERE datname = 'campusjavatest'";
+               
+               String checkDatabase = "SELECT 1 FROM pg_database WHERE datname = 'campusjavatest'"; // Si se cambia el nombre de la base de datos en el application.properties
+               }                                                                                    // también se debe cambiar acá
                var rs = stmt.executeQuery(checkDatabase);
 
-               // Si la base de datos no existe, crearla
+               
                if (!rs.next()) {
-                   // Consulta SQL para crear la base de datos 'campusjavatest'
-                   String createDatabase = "CREATE DATABASE campusjavatest";
+                  
+                   String createDatabase = "CREATE DATABASE campusjavatest"; // Si se cambia el nombre de la base de datos en el application.properties también se debe cambiar acá                                                              
                    stmt.executeUpdate(createDatabase);
                    // Mensaje de éxito
                    System.out.println("Base de datos creada exitosamente!!");
                } else {
-                   // Mensaje si la base de datos ya existe
+                   
                    System.out.println("La base de datos ya existe");
                }
            } catch (Exception e) {
-               // Imprimir el rastreo de la pila si ocurre una excepción
+               
                e.printStackTrace();
            }
        }
