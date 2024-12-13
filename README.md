@@ -37,6 +37,7 @@ spring.datasource.url=jdbc:postgresql://localhost:1402/campusjavatest
 spring.datasource.username=user
 spring.datasource.password=password
 spring.datasource.driver-class-name=org.postgresql.Driver
+```
 
 # Estructura de la Base de Datos
 
