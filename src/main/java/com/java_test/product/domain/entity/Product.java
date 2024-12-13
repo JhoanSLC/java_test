@@ -8,10 +8,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data // Automatically generates getters, setters, equals, hashCode, and toString methods
+@Data // Automatically generates getters, setters
 @NoArgsConstructor // Creates a no-arguments constructor
 @AllArgsConstructor // Creates a constructor with all fields of the class
-@Entity // Marks this class as a JPA entity, which will be mapped to a table in the database
+@Entity
 public class Product {
 
     @Id // Specifies that this field is the primary key of the table
@@ -19,11 +19,11 @@ public class Product {
     private Long id;
 
     @Column(nullable = false) // Specifies that this column cannot be null
-    @Size(min = 3, max = 50) // Enforces that the name must be between 3 and 50 characters long
+    @Size(min = 3, max = 100) // Enforces that the name must be between 3 and 50 characters long
     private String name;
 
     @Column(length = 255) // Specifies that the maximum length for this column is 255 characters
-    private String description; // Optional field to describe the product
+    private String description; 
 
     @Column(nullable = false) // Specifies that this column cannot be null
     @Positive // Enforces that the price must be a positive value
