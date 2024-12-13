@@ -95,6 +95,7 @@ INSERT INTO product (name, description, price, categoryid) VALUES
 ('Action Figure', 'Superhero action figure', 24.99, 3),
 ('Cookbook', 'Delicious recipes from around the world', 15.99, 4),
 ('Microwave', 'Compact microwave oven', 99.99, 5);
+```
 
 # Configuración de Spring Boot
 
@@ -121,6 +122,7 @@ spring.sql.init.mode=always
 # Ejecutar los scripts de inicialización
 spring.sql.init.schema-locations=classpath:schema.sql
 spring.sql.init.data-locations=classpath:data.sql
+```
 
 # Dependencias de Maven
 
@@ -147,6 +149,7 @@ Este proyecto usa Maven para gestionar las dependencias. Asegúrate de tener las
         <version>42.2.23</version>
     </dependency>
 </dependencies>
+```
 
 # Funcionalidades
 
@@ -246,6 +249,7 @@ Este proyecto usa Maven para gestionar las dependencias. Asegúrate de tener las
            }
        }
    }
+   ```
     Asegúrate de que la URL de la base de datos, el nombre de usuario y la contraseña coincidan con tu configuración de PostgreSQL.
 
 
